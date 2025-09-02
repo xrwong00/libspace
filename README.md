@@ -1,20 +1,54 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+LibSpace — Smart Library Seat Finder
+=================================
 
-# Run and deploy your AI Studio app
+A small React + Vite app that visualizes study room layouts and live seat availability across three floors.
 
-This contains everything you need to run your app locally.
+Features
+--------
+- Floor plans for 1F, 2F, and 3F with labeled facilities.
+- Seats show real-time status: green = available, red = occupied.
+- Live statistics panel (total / available / occupied / occupancy rate).
+- Simple simulated status updates (random toggles every 5 minutes) via `useSeatData`.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1TpKkh5i0c139VrrIt0guEnjhoEJQDfVX
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
+Quick start (Windows PowerShell)
+-------------------------------
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+
+```powershell
+npm install
+```
+
+2. Start the dev server:
+
+```powershell
+npm run dev
+```
+
+3. Open http://localhost:5173 (Vite default) in your browser.
+
+Where to change layout & seat counts
+-----------------------------------
+- Floor layouts and seat slices are defined in `components/FloorPlan.tsx`.
+   - `FloorPlan2F` contains the 2F grid and seating areas.
+   - Each `SeatingArea` receives a slice of the floor's seats (from `useSeatData`).
+
+- Seat generation and global counts live in `hooks/useSeatData.ts`.
+   - `SEAT_COUNTS` controls how many seats the app creates per floor.
+   - If you change slices in `FloorPlan.tsx`, update `SEAT_COUNTS['2F']` accordingly.
+
+How statistics are computed
+--------------------------
+- `useSeatData` returns `seatsByFloor` and `statsByFloor`.
+- `statsByFloor[floor]` includes total, available, occupied, and occupancy rate.
+- Available = total - occupied; occupied = seats.filter(s => s.status === SeatStatus.OCCUPIED).length
+
+Customizing behavior
+--------------------
+- To change the seat status update frequency, edit the interval inside `useEffect` in `hooks/useSeatData.ts`.
+- To seed specific seat states, modify `generateInitialSeats` in `hooks/useSeatData.ts`.
+
+Notes
+-----
+- The app uses a simple simulated data source; connect a real backend by replacing `useSeatData`.
+- Keep slices in `FloorPlan.tsx` synchronized with `SEAT_COUNTS` in `useSeatData.ts` to avoid mismatched indices.
+
