@@ -15,7 +15,7 @@ const Facility: React.FC<{ name: string; gridArea: string; letter: string, class
 );
 
 const SeatingArea: React.FC<{ seats: SeatData[]; gridArea: string; name: string, letter?: string, className?: string }> = ({ seats, gridArea, name, letter, className = '' }) => (
-  <div className={`relative bg-white p-1.5 rounded-lg flex flex-col gap-0.5 items-center justify-center border-2 border-dashed border-gray-400 shadow-sm ${className}`} style={{ gridArea, minHeight: '36px' }}>
+  <div className={`relative bg-white p-1.5 rounded-lg flex flex-col gap-0.5 items-center justify-center border-2 border-dashed border-gray-400 shadow-sm ${className}`} style={{ gridArea, minHeight: '60px' }}>
     {letter && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl sm:text-2xl font-bold text-gray-200 opacity-50 z-0 select-none pointer-events-none">{letter}</div>}
     <h3 className="relative text-gray-700 font-semibold text-xs text-center z-10 mb-0.5">{name}</h3>
     <div className="relative flex flex-wrap gap-0.5 justify-center items-center z-10 max-w-full">
@@ -160,8 +160,8 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   <Facility name="MAGAZINES" letter="J" gridArea="9 / 12 / 11 / 15" />
 
       {/* Diamonds C & D and Central Circle */}
-  <Facility name="CURRENT BOOKS" letter="C" gridArea="8 / 8 / 9 / 9" className="rotate-45 !px-1" />
-  <Facility name="CIRCULATION COUNTER" letter="D" gridArea="8 / 9 / 9 / 10" className="-rotate-45 !px-1" />
+  <Facility name="CURRENT BOOKS" letter="C" gridArea="8 / 8 / 9 / 9" />
+  <Facility name="CIRCULATION COUNTER" letter="D" gridArea="8 / 9 / 9 / 10" />
   <div style={{ gridArea: '9 / 7 / 12 / 11' }} className="relative flex items-center justify-center">
         <div className="w-full h-full border-4 border-gray-500 rounded-full flex items-center justify-center">
           <div className="w-2/3 h-2/3 border-2 border-gray-400 rounded-full"></div>
@@ -178,7 +178,7 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
 
       {/* Left side middle blocks - L above O, with study area next to L */}
   <Facility name="STUDY ROOM" letter="L" gridArea="13 / 2 / 14 / 3" />
-  <SeatingArea name="Study Area" seats={s.bottomCourseResL} gridArea="13 / 3 / 14 / 5" />
+  <SeatingArea name="Study Area" seats={s.bottomCourseResL} gridArea="13 / 3 / 15 / 5" />
   <Facility name="ART BOOKS" letter="E" gridArea="13 / 5 / 14 / 7" />
   
   {/* Right side middle blocks */}
