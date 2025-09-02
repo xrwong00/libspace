@@ -206,46 +206,74 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
 
 const FloorPlan3F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   const s = {
-    // Total: 50 seats
-    science: seats.slice(0, 8),          // F
-    seAsia: seats.slice(8, 16),          // A
-    studentSuccess: seats.slice(16, 28), // C
-    medical: seats.slice(28, 40),        // E
-    technology: seats.slice(40, 50),     // D
+    // Total: 50 seats distributed across study areas
+    studyArea1: seats.slice(0, 6),        // Below F
+    studyArea2: seats.slice(6, 12),       // Below A  
+    studyArea3: seats.slice(12, 18),      // Right of A
+    studyArea4: seats.slice(18, 24),      // Right of E
+    studyArea5: seats.slice(24, 30),      // Below G
+    studyArea6: seats.slice(30, 36),      // Left of C
+    studyArea7: seats.slice(36, 42),      // Bottom left
+    studyArea8: seats.slice(42, 48),      // Bottom right
+    studyArea9: seats.slice(48, 50),      // Small bottom area
   };
 
   return (
     <div 
-      className="grid gap-2 sm:gap-2.5 p-2 w-full h-full"
+      className="grid gap-1 p-2 w-full h-full bg-white rounded-lg border-2 border-gray-800"
       style={{
-        gridTemplateColumns: 'auto repeat(10, 1fr) auto',
-        gridTemplateRows: 'repeat(10, 1fr)',
-        minHeight: '65vh',
+        gridTemplateColumns: 'repeat(12, 1fr)',
+        gridTemplateRows: 'repeat(12, 1fr)',
+        aspectRatio: '1',
       }}
     >
-      {/* Facilities and Seating Areas */}
-      <SeatingArea name="SCIENCE COLL." seats={s.science} gridArea="1 / 5 / 3 / 7" letter="F" />
-      <SeatingArea name="SE ASIA CORNER" seats={s.seAsia} gridArea="1 / 8 / 3 / 10" letter="A"/>
+      {/* Top Row Facilities */}
+  <Facility name="SCIENCE COLLECTION" letter="F" gridArea="3 / 8 / 5 / 10" />
+  <Facility name="SOUTHEAST ASIA CORNER" letter="A" gridArea="3 / 10 / 5 / 12" />
       
-      <Facility name="READING CORRIDOR" letter="B" gridArea="2 / 2 / 9 / 3" className="!flex-col justify-around p-1"/>
-      <SeatingArea name="STUDENT SUCCESS" seats={s.studentSuccess} gridArea="3 / 3 / 8 / 6" letter="C"/>
+      {/* Left Reading Corridor */}
+  <Facility name="READING CORRIDOR" letter="B" gridArea="4 / 2 / 10 / 3" className="!flex-col justify-around p-1"/>
       
-      <SeatingArea name="MEDICAL COLL." seats={s.medical} gridArea="3 / 9 / 8 / 11" letter="E"/>
-      <Facility name="RESTROOM" letter="G" gridArea="8 / 9 / 10 / 11" />
-      <Facility name="READING CORRIDOR" letter="B" gridArea="2 / 12 / 9 / 13" className="!flex-col justify-around p-1"/>
+  {/* Study areas moved: now positioned above C */}
+  <SeatingArea name="Study Area" seats={s.studyArea1} gridArea="2 / 3 / 3 / 5" />
+  <SeatingArea name="Study Area" seats={s.studyArea2} gridArea="3 / 3 / 4 / 5" />
+      
+  <Facility name="STUDENT SUCCESS ROOM 1-3" letter="C" gridArea="4 / 3 / 8 / 5" />
+      
+  {/* Study areas overlapping E removed */}
 
-      <SeatingArea name="TECH COLL." seats={s.technology} gridArea="9 / 4 / 11 / 9" letter="D"/>
-
-      {/* Center Circle */}
-      <div style={{gridArea: '4 / 6 / 8 / 9'}} className="flex items-center justify-center p-4">
-        <div className="w-full h-full border-4 border-gray-300 rounded-full"></div>
+  {/* Medical Collection moved below the two study areas to the right */}
+  <Facility name="MEDICAL COLLECTION" letter="E" gridArea="7 / 10 / 8 / 12" />
+  
+  {/* Two study areas aligned to the right of E */}
+  <SeatingArea name="Study Area" seats={s.studyArea3} gridArea="5 / 10 / 6 / 12" />
+  <SeatingArea name="Study Area" seats={s.studyArea1} gridArea="6 / 10 / 7 / 12" />
+      
+      {/* Right Reading Corridor */}
+  <Facility name="READING CORRIDOR" letter="B" gridArea="4 / 12 / 10 / 13" className="!flex-col justify-around p-1"/>
+      
+  {/* Restroom */}
+  <Facility name="RESTROOM" letter="G" gridArea="8 / 10 / 9 / 12" />
+      <SeatingArea name="Study Area" seats={s.studyArea9} gridArea="8 / 3 / 9 / 5" />
+      <SeatingArea name="Study Area" seats={s.studyArea1.slice(0, 2)} gridArea="9 / 3 / 10 / 5" />
+      
+      {/* Technology Collection at bottom */}
+  <Facility name="TECHNOLOGY COLLECTION" letter="D" gridArea="10 / 4 / 12 / 8" />
+      
+      {/* Bottom study areas */}
+  <SeatingArea name="Study Area" seats={s.studyArea2.slice(0, 2)} gridArea="10 / 8 / 12 / 10" />
+  <SeatingArea name="Study Area" seats={s.studyArea3.slice(0, 2)} gridArea="10 / 10 / 12 / 12" />
+      
+  {/* Central Circle (moved left 1 column) */}
+  <div style={{gridArea: '6 / 6 / 9 / 9'}} className="flex items-center justify-center p-2">
+        <div className="w-full h-full border-4 border-gray-800 rounded-full"></div>
       </div>
       
-      {/* Stairs and Markers */}
-      <InfoMarker text="FROM/TO 2F" gridArea="2 / 1 / 4 / 2" icon={<StairsIcon/>} className="flex-col-reverse" />
-      <InfoMarker text="FROM/TO 2F" gridArea="7 / 1 / 9 / 2" icon={<StairsIcon/>} className="flex-col" />
-      <InfoMarker text="FROM/TO 2F" gridArea="2 / 13 / 4 / 14" icon={<StairsIcon/>} className="flex-col-reverse" />
-      <InfoMarker text="FROM/TO 2F" gridArea="7 / 13 / 9 / 14" icon={<StairsIcon/>} className="flex-col" />
+      {/* Stairs */}
+  <InfoMarker text="FROM/TO 2F" gridArea="4 / 1 / 6 / 2" icon={<StairsIcon/>} className="flex-col-reverse !text-orange-500" />
+  <InfoMarker text="FROM/TO 2F" gridArea="7 / 1 / 9 / 2" icon={<StairsIcon/>} className="!text-orange-500" />
+  <InfoMarker text="FROM/TO 2F" gridArea="4 / 14 / 6 / 15" icon={<StairsIcon/>} className="flex-col-reverse !text-orange-500" />
+  <InfoMarker text="FROM/TO 2F" gridArea="7 / 14 / 9 / 15" icon={<StairsIcon/>} className="!text-orange-500" />
     </div>
   );
 };
