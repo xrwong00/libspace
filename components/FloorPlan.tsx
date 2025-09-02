@@ -8,9 +8,9 @@ interface FloorPlanProps {
 }
 
 const Facility: React.FC<{ name: string; gridArea: string; letter: string, className?: string }> = ({ name, gridArea, letter, className = '' }) => (
-  <div className={`bg-blue-500 p-1.5 rounded-lg flex flex-col items-center justify-center text-center shadow-lg border border-blue-600 ${className}`} style={{ gridArea, minHeight: '36px' }}>
-    <span className="text-lg sm:text-xl font-bold text-white leading-tight mb-1">{letter}</span>
-    <span className="text-xs text-blue-100 text-center leading-tight hidden sm:block">{name}</span>
+  <div className={`bg-blue-50 p-1.5 rounded-lg flex flex-col items-center justify-center text-center shadow-lg border border-blue-100 ${className}`} style={{ gridArea, minHeight: '36px' }}>
+  <span className="text-lg sm:text-xl font-bold text-blue-900 leading-tight mb-1">{letter}</span>
+  <span className="text-[9px] sm:text-[10px] text-blue-800 text-center leading-tight">{name}</span>
   </div>
 );
 
@@ -57,7 +57,7 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   
   return (
     <div 
-      className="grid gap-1 p-2 w-full h-full bg-gray-100 rounded-lg border-2 border-gray-800"
+      className="grid gap-1 p-2 w-full h-full bg-white rounded-lg border-2 border-gray-800"
       style={{
         gridTemplateColumns: 'repeat(6, 1fr)',
         gridTemplateRows: 'repeat(6, 1fr)',
@@ -120,7 +120,7 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
 
   return (
     <div
-      className="grid gap-1 p-2 w-full h-full bg-gray-100 rounded-lg border-2 border-gray-800"
+      className="grid gap-1 p-2 w-full h-full bg-white rounded-lg border-2 border-gray-800"
       style={{
         gridTemplateColumns: 'repeat(16, 1fr)',
         gridTemplateRows: 'repeat(16, 1fr)',
