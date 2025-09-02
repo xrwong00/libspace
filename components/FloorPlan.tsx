@@ -97,7 +97,7 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
       
       {/* Row 5-6: H, I */}
       <Facility name="INTERNET ACCESS AREA" letter="H" gridArea="5 / 3 / 7 / 5" />
-      <Facility name="MAKERSPACE" letter="I" gridArea="5 / 5 / 7 / 7" />
+  <Facility name="MAKERSPACE" letter="I" gridArea="6 / 5 / 8 / 7" />
       
       {/* Row 6-7: G positioned directly below the study area, bottom-aligned with H and I */}
       <Facility name="TECHNOLOGY CREATION" letter="G" gridArea="6 / 1 / 7 / 2" />
@@ -173,8 +173,8 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
       </div>
 
       {/* Lower mid left & right (Stairs markers to 3F) */}
-  <InfoMarker text="TO/FROM 3F" gridArea="12 / 2 / 13 / 4" icon={<StairsIcon />} className="!text-orange-600" />
-  <InfoMarker text="TO/FROM 3F" gridArea="12 / 14 / 13 / 16" icon={<StairsIcon />} className="!text-orange-600" />
+  <InfoMarker text="TO/FROM 3F" gridArea="11 / 2 / 12 / 4" icon={<StairsIcon />} className="!text-orange-600" />
+  <InfoMarker text="TO/FROM 3F" gridArea="11 / 14 / 12 / 16" icon={<StairsIcon />} className="!text-orange-600" />
 
       {/* Left side middle blocks - L above O, with study area next to L */}
   <Facility name="STUDY ROOM" letter="L" gridArea="13 / 2 / 14 / 3" />
