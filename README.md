@@ -26,6 +26,20 @@ npm run dev
 
 3. Open http://localhost:5173 (Vite default) in your browser.
 
+Environment variables
+---------------------
+If your project uses external APIs (for example a Gemini API key), keep local secrets out of source control.
+
+Create a file named `.env.local` in the project root and add any keys you need, for example:
+
+```text
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+Make sure `.env.local` is listed in `.gitignore` (it is already in this repo) so you don't accidentally commit secrets.
+
+For production, configure secrets through your hosting provider or CI (Vercel, Netlify, GitHub Actions secrets, etc.) instead of committing them.
+
 Where to change layout & seat counts
 -----------------------------------
 - Floor layouts and seat slices are defined in `components/FloorPlan.tsx`.
