@@ -1,0 +1,5 @@
+{
+  "name": "LibSpace: Smart Library Seat Finder",
+  "description": "A real-time dashboard that visualizes live seat availability in a library, designed for a university hackathon. It features an interactive floor plan and dynamic statistics, with data flow simulated to mimic IoT device updates.",
+  "requestFramePermissions": []
+}
