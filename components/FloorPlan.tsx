@@ -109,15 +109,18 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
 
 
 const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
-  // Seat allocation (total 40 for 2F): added new study area
+  // Seat allocation (total 48 for 2F): study areas beside B and L have 9 seats each
   const s = {
-    topStudyLeft: seats.slice(0, 8),
-    topStudyRight: seats.slice(8, 16),
-    bottomCourseResL: seats.slice(16, 22),      // F left
-    bottomCourseResR: seats.slice(22, 28),      // F right
-    smallStudyLeft: seats.slice(28, 32),        // 4 seats below left L
-    smallStudyRight: seats.slice(32, 36),       // 4 seats below right L
-    newStudyArea: seats.slice(36, 40),          // 4 seats new study area
+    // Adjusted so the study areas beside B and L have 9 seats each.
+    // Total for 2F is 48 seats; slices are balanced to sum to 48.
+    topStudyLeft: seats.slice(0, 9),            // 9 seats
+    topStudyRight: seats.slice(9, 18),          // 9 seats
+    bottomCourseResL: seats.slice(36, 42),      // 6 seats (left)
+    bottomCourseResR: seats.slice(24, 30),      // 6 seats (right)
+    smallStudyLeft: seats.slice(18, 24),        // 6 seats below left L
+    newStudyArea: seats.slice(24, 30),          // 6 seats new study area
+    smallStudyRight: seats.slice(30, 36),       // 6 seats below right L
+    bottomRightStudy: seats.slice(42, 48),      // 6 seats: study area below right phone room O
   };
 
   return (
@@ -195,11 +198,13 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   <Facility name="PHONE ROOM" letter="O" gridArea="14 / 2 / 15 / 3" />
   <Facility name="DISCUSSION" letter="M" gridArea="15 / 3 / 16 / 13" />
   <Facility name="PHONE ROOM" letter="O" gridArea="14 / 14 / 15 / 16" />
+  {/* New study area (14 seats) below right Phone Room O */}
+  <SeatingArea name="Study Area" seats={s.bottomRightStudy} gridArea="15 / 14 / 17 / 16" />
   
   {/* Bottom row - A and G */}
   <Facility name="WESTERN BOOKS" letter="A" gridArea="16 / 2 / 17 / 7" />
   <Facility name="CHINESE BOOKS" letter="G" gridArea="16 / 7 / 17 / 13" />
-  <Facility name="WESTERN BOOKS" letter="A" gridArea="16 / 14 / 17 / 16" />
+  {/* Right-bottom 'A' removed per user request */}
 
       {/* Bottom extra row spacing (acts as padding) */}
     </div>

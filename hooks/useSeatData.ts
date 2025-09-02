@@ -4,7 +4,7 @@ import { SeatData, SeatStatus, Stats, Floor } from '../types';
 
 const SEAT_COUNTS: Record<Floor, number> = {
   '1F': 65, // Increased to 65 to allocate two 10-seat study areas below J (and other areas)
-  '2F': 40, // Increased from 36 after adding new study area
+  '2F': 48, // Updated to match actual seat allocation: 9+9+6+6+6+6+6 = 48 seats
   '3F': 72, // Updated to accommodate 9 study areas with 8 seats each
 };
 
