@@ -43,7 +43,8 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
     upperLeftWhite: seats.slice(0, 10),     // White area below D - increased to 10 seats
     upperRightWhite: seats.slice(10, 20),   // White area to the right of A - increased to 10 seats
     leftMergedWhite: seats.slice(20, 44),  // Merged white area below F (combining leftMiddle and bottomLeft)
-    bottomRightWhite: seats.slice(44, 52), // White area below J
+    studyAreaBelowC1: seats.slice(44, 52), // First study area below C - 8 seats
+    studyAreaBelowC2: seats.slice(52, 60), // Second study area below C - 8 seats
   };
   
   const StairsFacility: React.FC<{ gridArea: string }> = ({ gridArea }) => (
@@ -90,10 +91,11 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
       </div>
       <Facility name="INSTRUCTION ROOM" letter="K" gridArea="3 / 5 / 4 / 7" />
       
-      {/* Row 4-6: Rearranged layout - J below K, study area below J */}
+      {/* Row 4-6: Rearranged layout - J below K, two study areas below C */}
       <SeatingArea name="Study Area" gridArea="4 / 1 / 6 / 2" seats={seatingAreas.leftMergedWhite} />
       <Facility name="RESTROOM" letter="J" gridArea="4 / 5 / 5 / 7" />
-      <SeatingArea name="Study Area" gridArea="5 / 5 / 6 / 7" seats={seatingAreas.bottomRightWhite} />
+      <SeatingArea name="Study Area" gridArea="5 / 5 / 6 / 6" seats={seatingAreas.studyAreaBelowC1} />
+      <SeatingArea name="Study Area" gridArea="5 / 6 / 6 / 7" seats={seatingAreas.studyAreaBelowC2} />
       
       {/* Row 5-6: H, I */}
       <Facility name="INTERNET ACCESS AREA" letter="H" gridArea="5 / 3 / 7 / 5" />
@@ -206,16 +208,16 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
 
 const FloorPlan3F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   const s = {
-    // Total: 50 seats distributed across study areas
-    studyArea1: seats.slice(0, 6),        // Below F
-    studyArea2: seats.slice(6, 12),       // Below A  
-    studyArea3: seats.slice(12, 18),      // Right of A
-    studyArea4: seats.slice(18, 24),      // Right of E
-    studyArea5: seats.slice(24, 30),      // Below G
-    studyArea6: seats.slice(30, 36),      // Left of C
-    studyArea7: seats.slice(36, 42),      // Bottom left
-    studyArea8: seats.slice(42, 48),      // Bottom right
-    studyArea9: seats.slice(48, 50),      // Small bottom area
+    // Total: 72 seats distributed across 9 study areas (8 seats each)
+  studyArea1: seats.slice(0, 8),        // Above C area 1 (8 seats)
+  studyArea2: seats.slice(8, 16),       // Above C area 2 (8 seats)
+  studyArea3: seats.slice(16, 24),      // Right of E area 1 (8 seats)
+  studyArea4: seats.slice(24, 32),      // Right of E area 2 (8 seats)
+  studyArea5: seats.slice(32, 40),      // Left of C area 1 (8 seats)
+  studyArea6: seats.slice(40, 48),      // Left of C area 2 (8 seats)
+  studyArea7: seats.slice(48, 56),      // Bottom area 1 (8 seats)
+  studyArea8: seats.slice(56, 64),      // Bottom area 2 (8 seats)
+  studyArea9: seats.slice(64, 72),      // Bottom area 3 (8 seats)
   };
 
   return (
@@ -247,22 +249,23 @@ const FloorPlan3F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   
   {/* Two study areas aligned to the right of E */}
   <SeatingArea name="Study Area" seats={s.studyArea3} gridArea="5 / 10 / 6 / 12" />
-  <SeatingArea name="Study Area" seats={s.studyArea1} gridArea="6 / 10 / 7 / 12" />
+  <SeatingArea name="Study Area" seats={s.studyArea4} gridArea="6 / 10 / 7 / 12" />
       
       {/* Right Reading Corridor */}
   <Facility name="READING CORRIDOR" letter="B" gridArea="4 / 12 / 10 / 13" className="!flex-col justify-around p-1"/>
       
   {/* Restroom */}
   <Facility name="RESTROOM" letter="G" gridArea="8 / 10 / 9 / 12" />
-      <SeatingArea name="Study Area" seats={s.studyArea9} gridArea="8 / 3 / 9 / 5" />
-      <SeatingArea name="Study Area" seats={s.studyArea1.slice(0, 2)} gridArea="9 / 3 / 10 / 5" />
+  <SeatingArea name="Study Area" seats={s.studyArea5} gridArea="8 / 3 / 9 / 5" />
+  <SeatingArea name="Study Area" seats={s.studyArea6} gridArea="9 / 3 / 10 / 5" />
       
       {/* Technology Collection at bottom */}
   <Facility name="TECHNOLOGY COLLECTION" letter="D" gridArea="10 / 4 / 12 / 8" />
       
       {/* Bottom study areas */}
-  <SeatingArea name="Study Area" seats={s.studyArea2.slice(0, 2)} gridArea="10 / 8 / 12 / 10" />
-  <SeatingArea name="Study Area" seats={s.studyArea3.slice(0, 2)} gridArea="10 / 10 / 12 / 12" />
+  <SeatingArea name="Study Area" seats={s.studyArea7} gridArea="10 / 8 / 11 / 10" />
+  <SeatingArea name="Study Area" seats={s.studyArea8} gridArea="10 / 10 / 11 / 12" />
+  <SeatingArea name="Study Area" seats={s.studyArea9} gridArea="11 / 8 / 12 / 12" />
       
   {/* Central Circle (moved left 1 column) */}
   <div style={{gridArea: '6 / 6 / 9 / 9'}} className="flex items-center justify-center p-2">

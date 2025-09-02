@@ -3,9 +3,9 @@ import { useState, useEffect, useMemo } from 'react';
 import { SeatData, SeatStatus, Stats, Floor } from '../types';
 
 const SEAT_COUNTS: Record<Floor, number> = {
-  '1F': 52,
+  '1F': 60, // Increased from 52 to add 8 more seats for second study area below C
   '2F': 40, // Increased from 36 after adding new study area
-  '3F': 50, // Estimated from floor plan
+  '3F': 72, // Updated to accommodate 9 study areas with 8 seats each
 };
 
 // Generate initial seat data for a given number of seats
