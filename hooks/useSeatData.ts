@@ -4,7 +4,7 @@ import { SeatData, SeatStatus, Stats, Floor } from '../types';
 
 const SEAT_COUNTS: Record<Floor, number> = {
   '1F': 52,
-  '2F': 64, // Reduced from 84 since silent study zones (K) now have no seats
+  '2F': 40, // Increased from 36 after adding new study area
   '3F': 50, // Estimated from floor plan
 };
 

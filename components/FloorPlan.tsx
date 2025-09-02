@@ -8,14 +8,14 @@ interface FloorPlanProps {
 }
 
 const Facility: React.FC<{ name: string; gridArea: string; letter: string, className?: string }> = ({ name, gridArea, letter, className = '' }) => (
-  <div className={`bg-blue-500 p-1.5 rounded-lg flex flex-col items-center justify-center text-center shadow-lg border border-blue-600 ${className}`} style={{ gridArea, minHeight: '50px' }}>
+  <div className={`bg-blue-500 p-1.5 rounded-lg flex flex-col items-center justify-center text-center shadow-lg border border-blue-600 ${className}`} style={{ gridArea, minHeight: '36px' }}>
     <span className="text-lg sm:text-xl font-bold text-white leading-tight mb-1">{letter}</span>
     <span className="text-xs text-blue-100 text-center leading-tight hidden sm:block">{name}</span>
   </div>
 );
 
 const SeatingArea: React.FC<{ seats: SeatData[]; gridArea: string; name: string, letter?: string, className?: string }> = ({ seats, gridArea, name, letter, className = '' }) => (
-  <div className={`relative bg-white p-1.5 rounded-lg flex flex-col gap-1 items-center justify-center border-2 border-dashed border-gray-400 shadow-sm ${className}`} style={{ gridArea, minHeight: '50px' }}>
+  <div className={`relative bg-white p-1.5 rounded-lg flex flex-col gap-0.5 items-center justify-center border-2 border-dashed border-gray-400 shadow-sm ${className}`} style={{ gridArea, minHeight: '36px' }}>
     {letter && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl sm:text-2xl font-bold text-gray-200 opacity-50 z-0 select-none pointer-events-none">{letter}</div>}
     <h3 className="relative text-gray-700 font-semibold text-xs text-center z-10 mb-0.5">{name}</h3>
     <div className="relative flex flex-wrap gap-0.5 justify-center items-center z-10 max-w-full">
@@ -107,23 +107,24 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
 
 
 const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
-  // Re-map seats to the two visible study areas (top left & top right) and lower study/discussion areas
+  // Seat allocation (total 40 for 2F): added new study area
   const s = {
-    topStudyLeft: seats.slice(0, 10),
-    topStudyRight: seats.slice(10, 20),
-    lowerDiscussionLeft: seats.slice(20, 36),   // M left
-    lowerDiscussionRight: seats.slice(36, 52),  // M right
-    bottomCourseResL: seats.slice(52, 58),      // F left
-    bottomCourseResR: seats.slice(58, 64),      // F right
+    topStudyLeft: seats.slice(0, 8),
+    topStudyRight: seats.slice(8, 16),
+    bottomCourseResL: seats.slice(16, 22),      // F left
+    bottomCourseResR: seats.slice(22, 28),      // F right
+    smallStudyLeft: seats.slice(28, 32),        // 4 seats below left L
+    smallStudyRight: seats.slice(32, 36),       // 4 seats below right L
+    newStudyArea: seats.slice(36, 40),          // 4 seats new study area
   };
 
   return (
     <div
       className="grid gap-1 p-2 w-full h-full bg-gray-100 rounded-lg border-2 border-gray-800"
       style={{
-        gridTemplateColumns: 'repeat(16, 1fr)', // 1: corridor left, 16: corridor right
-        gridTemplateRows: 'repeat(18, 1fr)',
-        aspectRatio: '5/4'
+        gridTemplateColumns: 'repeat(16, 1fr)',
+        gridTemplateRows: 'repeat(16, 1fr)',
+        aspectRatio: '16/9'
       }}
     >
       {/* Left / Right Corridors (H) */}
@@ -131,30 +132,37 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
       <Facility name="GRAND READING CORRIDOR" letter="H" gridArea="1 / 16 / 19 / 17" className="!flex-col justify-around p-1" />
 
       {/* TOP BLOCKS */}
-      <Facility name="WESTERN BOOKS" letter="A" gridArea="1 / 3 / 3 / 8" />
-      <Facility name="WESTERN BOOKS" letter="A" gridArea="1 / 10 / 3 / 15" />
-      <Facility name="PHONE ROOM" letter="O" gridArea="3 / 3 / 4 / 4" />
+  <Facility name="WESTERN BOOKS" letter="A" gridArea="1 / 2 / 3 / 8" />
+  <Facility name="WESTERN BOOKS" letter="A" gridArea="1 / 10 / 3 / 16" />
+  <Facility name="PHONE ROOM" letter="O" gridArea="3 / 2 / 4 / 4" />
       <Facility name="SILENT STUDY ZONE" letter="K" gridArea="3 / 4 / 4 / 8" />
       <Facility name="SILENT STUDY ZONE" letter="K" gridArea="3 / 10 / 4 / 14" />
-      <Facility name="PHONE ROOM" letter="O" gridArea="3 / 14 / 4 / 15" />
+  <Facility name="PHONE ROOM" letter="O" gridArea="3 / 14 / 4 / 16" />
 
-      {/* UPPER STUDY / COURSE RESERVES (Left & Right) */}
-      <Facility name="STUDY ROOM" letter="L" gridArea="4 / 3 / 7 / 4" />
-      <SeatingArea name="Study Area" seats={s.topStudyLeft} gridArea="4 / 4 / 8 / 6" />
-      <Facility name="COURSE RESERVES" letter="B" gridArea="4 / 6 / 9 / 9" />
+  {/* UPPER STUDY / COURSE RESERVES (Reduced height) */}
+  <Facility name="STUDY ROOM" letter="L" gridArea="4 / 2 / 7 / 4" />
+  <SeatingArea name="Study Area" seats={s.topStudyLeft} gridArea="4 / 4 / 7 / 6" />
+  <Facility name="COURSE RESERVES" letter="B" gridArea="4 / 6 / 7 / 9" />
 
-      <Facility name="COURSE RESERVES" letter="B" gridArea="4 / 9 / 9 / 12" />
-      <SeatingArea name="Study Area" seats={s.topStudyRight} gridArea="4 / 12 / 8 / 14" />
-      <Facility name="STUDY ROOM" letter="L" gridArea="4 / 14 / 7 / 15" />
+  <Facility name="COURSE RESERVES" letter="B" gridArea="4 / 9 / 7 / 12" />
+  <SeatingArea name="Study Area" seats={s.topStudyRight} gridArea="4 / 12 / 7 / 14" />
+  <Facility name="STUDY ROOM" letter="L" gridArea="4 / 14 / 7 / 16" />
+
+  {/* New small 4-seat study areas below L blocks */}
+  <SeatingArea name="Study Area" seats={s.smallStudyLeft} gridArea="7 / 2 / 9 / 4" />
+  <SeatingArea name="Study Area" seats={s.smallStudyRight} gridArea="7 / 14 / 9 / 16" />
+  
+  {/* Additional study area moved up to align with others */}
+  <SeatingArea name="Study Area" seats={s.newStudyArea} gridArea="7 / 12 / 9 / 14" />
 
       {/* LIFT / RESTROOM / MAGAZINES / STAIRS (Left & Right) */}
-      <Facility name="LIFT TO G, 2F" letter="N" gridArea="7 / 3 / 10 / 5" />
-      <Facility name="MAGAZINES" letter="J" gridArea="7 / 12 / 10 / 14" />
+  <Facility name="LIFT TO G, 2F" letter="N" gridArea="9 / 2 / 11 / 5" />
+  <Facility name="MAGAZINES" letter="J" gridArea="9 / 12 / 11 / 15" />
 
       {/* Diamonds C & D and Central Circle */}
-      <Facility name="CURRENT BOOKS" letter="C" gridArea="8 / 8 / 10 / 9" className="rotate-45 !px-1" />
-      <Facility name="CIRCULATION COUNTER" letter="D" gridArea="8 / 9 / 10 / 10" className="-rotate-45 !px-1" />
-      <div style={{ gridArea: '10 / 7 / 15 / 11' }} className="relative flex items-center justify-center">
+  <Facility name="CURRENT BOOKS" letter="C" gridArea="8 / 8 / 9 / 9" className="rotate-45 !px-1" />
+  <Facility name="CIRCULATION COUNTER" letter="D" gridArea="8 / 9 / 9 / 10" className="-rotate-45 !px-1" />
+  <div style={{ gridArea: '9 / 7 / 12 / 11' }} className="relative flex items-center justify-center">
         <div className="w-full h-full border-4 border-gray-500 rounded-full flex items-center justify-center">
           <div className="w-2/3 h-2/3 border-2 border-gray-400 rounded-full"></div>
         </div>
@@ -165,26 +173,31 @@ const FloorPlan2F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
       </div>
 
       {/* Lower mid left & right (Stairs markers to 3F) */}
-      <InfoMarker text="TO/FROM 3F" gridArea="10 / 3 / 11 / 5" icon={<StairsIcon />} className="!text-orange-600" />
-      <InfoMarker text="TO/FROM 3F" gridArea="10 / 12 / 11 / 14" icon={<StairsIcon />} className="!text-orange-600" />
+  <InfoMarker text="TO/FROM 3F" gridArea="12 / 2 / 13 / 4" icon={<StairsIcon />} className="!text-orange-600" />
+  <InfoMarker text="TO/FROM 3F" gridArea="12 / 14 / 13 / 16" icon={<StairsIcon />} className="!text-orange-600" />
 
-      {/* Lower Left Blocks (E, M, A, G, O etc.) */}
-      <Facility name="ART BOOKS" letter="E" gridArea="11 / 4 / 14 / 5" />
-      <SeatingArea name="DISCUSSION" seats={s.lowerDiscussionLeft} gridArea="11 / 5 / 15 / 9" letter="M" />
-      <Facility name="PHONE ROOM" letter="O" gridArea="15 / 3 / 16 / 4" />
-      <Facility name="STUDY ROOM" letter="L" gridArea="14 / 3 / 16 / 4" className="hidden" />
-      <Facility name="COURSE RESERVES" letter="F" gridArea="15 / 5 / 16 / 9" />
-      <Facility name="WESTERN BOOKS" letter="A" gridArea="16 / 5 / 17 / 7" />
-      <Facility name="CHINESE BOOKS" letter="G" gridArea="16 / 7 / 17 / 9" />
+      {/* Left side middle blocks - L above O, with study area next to L */}
+  <Facility name="STUDY ROOM" letter="L" gridArea="13 / 2 / 14 / 3" />
+  <SeatingArea name="Study Area" seats={s.bottomCourseResL} gridArea="13 / 3 / 14 / 5" />
+  <Facility name="ART BOOKS" letter="E" gridArea="13 / 5 / 14 / 7" />
+  
+  {/* Right side middle blocks */}
+  <Facility name="RESTROOM" letter="I" gridArea="13 / 12 / 14 / 14" />
+  <Facility name="STUDY ROOM" letter="L" gridArea="13 / 14 / 14 / 16" />
 
-      {/* Lower Right Blocks (E, M, G, O etc.) */}
-      <Facility name="ART BOOKS" letter="E" gridArea="11 / 11 / 14 / 12" />
-      <SeatingArea name="DISCUSSION" seats={s.lowerDiscussionRight} gridArea="11 / 9 / 15 / 13" letter="M" />
-      <Facility name="RESTROOM" letter="I" gridArea="11 / 13 / 13 / 15" />
-      <Facility name="COURSE RESERVES" letter="F" gridArea="15 / 9 / 16 / 13" />
-      <Facility name="CHINESE BOOKS" letter="G" gridArea="16 / 9 / 17 / 13" />
-      <Facility name="PHONE ROOM" letter="O" gridArea="15 / 14 / 16 / 15" />
-      <Facility name="STUDY ROOM" letter="L" gridArea="14 / 14 / 16 / 15" className="hidden" />
+  {/* Course reserves below circle */}
+  <Facility name="COURSE RESERVES" letter="F" gridArea="14 / 5 / 15 / 9" />
+  <Facility name="COURSE RESERVES" letter="F" gridArea="14 / 9 / 15 / 13" />
+
+      {/* Second row - O and M spanning */}
+  <Facility name="PHONE ROOM" letter="O" gridArea="14 / 2 / 15 / 3" />
+  <Facility name="DISCUSSION" letter="M" gridArea="15 / 3 / 16 / 13" />
+  <Facility name="PHONE ROOM" letter="O" gridArea="14 / 14 / 15 / 16" />
+  
+  {/* Bottom row - A and G */}
+  <Facility name="WESTERN BOOKS" letter="A" gridArea="16 / 2 / 17 / 7" />
+  <Facility name="CHINESE BOOKS" letter="G" gridArea="16 / 7 / 17 / 13" />
+  <Facility name="WESTERN BOOKS" letter="A" gridArea="16 / 14 / 17 / 16" />
 
       {/* Bottom extra row spacing (acts as padding) */}
     </div>
