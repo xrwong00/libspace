@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { SeatData, SeatStatus, Stats, Floor } from '../types';
 
 const SEAT_COUNTS: Record<Floor, number> = {
-  '1F': 48,
+  '1F': 52,
   '2F': 84, // Estimated from floor plan
   '3F': 50, // Estimated from floor plan
 };

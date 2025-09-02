@@ -42,10 +42,10 @@ const StairsIcon: React.FC = () => (
 
 const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   const seatingAreas = {
-    upperLeftWhite: seats.slice(0, 8),     // White area below D
-    upperRightWhite: seats.slice(8, 16),   // White area to the right of A
-    leftMergedWhite: seats.slice(16, 40),  // Merged white area below F (combining leftMiddle and bottomLeft)
-    bottomRightWhite: seats.slice(24, 32), // White area below J
+    upperLeftWhite: seats.slice(0, 10),     // White area below D - increased to 10 seats
+    upperRightWhite: seats.slice(10, 20),   // White area to the right of A - increased to 10 seats
+    leftMergedWhite: seats.slice(20, 44),  // Merged white area below F (combining leftMiddle and bottomLeft)
+    bottomRightWhite: seats.slice(44, 52), // White area below J
   };
   
   const StairsFacility: React.FC<{ gridArea: string }> = ({ gridArea }) => (
