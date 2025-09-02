@@ -34,9 +34,9 @@ const App: React.FC = () => {
       <div className="container mx-auto">
         <header className="flex flex-col sm:flex-row justify-between sm:items-center mb-8 gap-4">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
               📚LibSpace
-              <span className="block text-lg text-gray-600 font-normal tracking-normal mt-1 pl-9 sm:pl-12">Smart Library Seat Finder</span>
+              <span className="block text-base text-gray-600 font-normal tracking-normal mt-1 pl-9 sm:pl-12">Smart Library Seat Finder</span>
             </h1>
           </div>
 
@@ -57,8 +57,8 @@ const App: React.FC = () => {
         </header>
         
         <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">{floorInfo[currentFloor].name} ({currentFloor})</h2>
-            <p className="text-md text-gray-500 mt-1">{floorInfo[currentFloor].description}</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{floorInfo[currentFloor].name} ({currentFloor})</h2>
+            <p className="text-base text-gray-500 mt-1">{floorInfo[currentFloor].description}</p>
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">

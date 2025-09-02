@@ -21,7 +21,7 @@ export const QuickInfoPanel: React.FC<QuickInfoPanelProps> = ({ stats, floor }) 
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 space-y-4">
-      <h2 className="text-2xl font-bold text-gray-900">Quick Info</h2>
+      <h2 className="text-xl font-bold text-gray-900">Quick Info</h2>
       <div className="flex justify-between items-center text-sm">
         <span className="text-gray-500">Peak Hours</span>
         <span className="font-semibold text-gray-800">3 PM - 7 PM</span>

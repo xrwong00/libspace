@@ -10,16 +10,16 @@ interface FloorPlanProps {
 const Facility: React.FC<{ name: string; gridArea: string; letter: string, className?: string }> = ({ name, gridArea, letter, className = '' }) => (
   <div className={`bg-blue-100 p-1.5 rounded-lg flex items-center justify-center text-center shadow-md ${className}`} style={{ gridArea }}>
     <div className="flex flex-col justify-center items-center">
-      <span className="text-lg sm:text-xl font-bold text-blue-800 leading-tight">{letter}</span>
-      <span className="text-[10px] text-gray-500 hidden sm:block leading-tight">{name}</span>
+      <span className="text-base sm:text-lg font-bold text-blue-800 leading-tight">{letter}</span>
+      <span className="text-xs text-gray-500 hidden sm:block leading-tight">{name}</span>
     </div>
   </div>
 );
 
 const SeatingArea: React.FC<{ seats: SeatData[]; gridArea: string; name: string, letter?: string, className?: string }> = ({ seats, gridArea, name, letter, className = '' }) => (
   <div className={`relative bg-gray-50 p-2 rounded-lg flex flex-col gap-2 items-center border-2 border-dashed border-gray-300 ${className}`} style={{ gridArea }}>
-    {letter && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl sm:text-7xl font-bold text-gray-300 opacity-80 z-0 select-none pointer-events-none">{letter}</div>}
-    <h3 className="relative text-gray-600 font-semibold text-[10px] sm:text-xs text-center z-10">{name}</h3>
+    {letter && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl sm:text-5xl font-bold text-gray-300 opacity-80 z-0 select-none pointer-events-none">{letter}</div>}
+    <h3 className="relative text-gray-600 font-semibold text-xs sm:text-sm text-center z-10">{name}</h3>
     <div className="relative flex flex-wrap gap-1 sm:gap-1.5 justify-center z-10">
         {seats.map(seat => <Seat key={seat.id} seat={seat} />)}
     </div>
