@@ -15,7 +15,7 @@ const SeatIcon: React.FC<{ status: SeatStatus }> = ({ status }) => (
 export const Seat: React.FC<SeatProps> = ({ seat }) => {
   const isAvailable = seat.status === SeatStatus.AVAILABLE;
 
-  const baseClasses = 'relative group w-8 h-8 sm:w-10 sm:h-10 p-1 rounded-md cursor-pointer transition-all duration-300';
+  const baseClasses = 'relative group w-5 h-5 sm:w-6 sm:h-6 p-0.5 rounded-md cursor-pointer transition-all duration-300';
   const statusClasses = isAvailable
     ? 'text-brand-green bg-green-100 hover:bg-green-200 animate-glow'
     : 'text-brand-red bg-red-100 hover:bg-red-200';

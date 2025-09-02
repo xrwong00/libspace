@@ -8,19 +8,19 @@ interface FloorPlanProps {
 }
 
 const Facility: React.FC<{ name: string; gridArea: string; letter: string, className?: string }> = ({ name, gridArea, letter, className = '' }) => (
-  <div className={`bg-blue-100 p-1.5 rounded-lg flex items-center justify-center text-center shadow-md ${className}`} style={{ gridArea }}>
+  <div className={`bg-blue-500 p-1.5 rounded-lg flex items-center justify-center text-center shadow-lg border border-blue-600 ${className}`} style={{ gridArea, minHeight: '50px' }}>
     <div className="flex flex-col justify-center items-center">
-      <span className="text-base sm:text-lg font-bold text-blue-800 leading-tight">{letter}</span>
-      <span className="text-xs text-gray-500 hidden sm:block leading-tight">{name}</span>
+      <span className="text-sm sm:text-lg font-bold text-white leading-tight">{letter}</span>
+      <span className="text-xs text-blue-100 text-center leading-tight mt-0.5 hidden sm:block">{name}</span>
     </div>
   </div>
 );
 
 const SeatingArea: React.FC<{ seats: SeatData[]; gridArea: string; name: string, letter?: string, className?: string }> = ({ seats, gridArea, name, letter, className = '' }) => (
-  <div className={`relative bg-gray-50 p-2 rounded-lg flex flex-col gap-2 items-center border-2 border-dashed border-gray-300 ${className}`} style={{ gridArea }}>
-    {letter && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl sm:text-5xl font-bold text-gray-300 opacity-80 z-0 select-none pointer-events-none">{letter}</div>}
-    <h3 className="relative text-gray-600 font-semibold text-xs sm:text-sm text-center z-10">{name}</h3>
-    <div className="relative flex flex-wrap gap-1 sm:gap-1.5 justify-center z-10">
+  <div className={`relative bg-white p-1.5 rounded-lg flex flex-col gap-1 items-center justify-center border-2 border-dashed border-gray-400 shadow-sm ${className}`} style={{ gridArea, minHeight: '50px' }}>
+    {letter && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl sm:text-2xl font-bold text-gray-200 opacity-50 z-0 select-none pointer-events-none">{letter}</div>}
+    <h3 className="relative text-gray-700 font-semibold text-xs text-center z-10 mb-0.5">{name}</h3>
+    <div className="relative flex flex-wrap gap-0.5 justify-center items-center z-10 max-w-full">
         {seats.map(seat => <Seat key={seat.id} seat={seat} />)}
     </div>
   </div>
@@ -42,54 +42,67 @@ const StairsIcon: React.FC = () => (
 
 const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   const seatingAreas = {
-    quietZone: seats.slice(0, 12),
-    mainArea: seats.slice(12, 36),
-    collabPods: seats.slice(36, 48),
+    upperLeftWhite: seats.slice(0, 8),     // White area below D
+    upperRightWhite: seats.slice(8, 16),   // White area to the right of A
+    leftMiddleWhite: seats.slice(16, 24),  // White area between stairs and circle
+    bottomRightWhite: seats.slice(24, 32), // White area below J
+    bottomLeftWhite: seats.slice(32, 40),  // White area above G
   };
+  
   const StairsFacility: React.FC<{ gridArea: string }> = ({ gridArea }) => (
-    <div className="bg-blue-100 py-2 px-1 rounded-lg flex flex-col items-center justify-around text-center shadow-md text-orange-500 h-full" style={{ gridArea }}>
-        <span className="font-semibold text-xs sm:text-sm whitespace-nowrap" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}>
-            TO/FROM 2F
-        </span>
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} style={{transform: 'rotate(90deg)'}}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+    <div className="bg-orange-100 py-1 px-2 rounded-lg flex flex-col items-center justify-center text-center shadow-md text-orange-600 h-full border border-orange-200" style={{ gridArea }}>
+        <span className="font-semibold text-xs whitespace-nowrap">TO/FROM 2F</span>
+        <svg className="w-4 h-4 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l4-4m0 0l4 4m-4-4v18" />
         </svg>
     </div>
   );
+  
   return (
     <div 
-      className="grid gap-2 sm:gap-4 p-2 w-full h-full"
+      className="grid gap-1 p-2 w-full h-full bg-gray-100 rounded-lg border-2 border-gray-800"
       style={{
-        gridTemplateAreas: `
-          ". entrance entrance entrance entrance b a"
-          "d .         .         .      .    b a"
-          "d quiet     quiet     c       c    main main"
-          "f stairs-left e         k       k    main main"
-          "f stairs-c  stairs-c  j       j    pods pods"
-          "g h         h         h       h    i i"
-        `,
-        gridTemplateColumns: '1fr 0.5fr 1fr 0.5fr 0.5fr 1fr 1fr',
-        gridTemplateRows: 'auto auto 1fr 1fr auto 1fr',
-        minHeight: '60vh',
+        gridTemplateColumns: 'repeat(6, 1fr)',
+        gridTemplateRows: 'repeat(6, 1fr)',
+        height: '100%',
+        aspectRatio: '3/2',
       }}
     >
-      <Facility name="IT OFFICE" letter="A" gridArea="a" />
-      <Facility name="IT HELPDESK" letter="B" gridArea="b" />
-      <Facility name="PHOTOCOPYING" letter="C" gridArea="c" />
-      <Facility name="SELF SERVICE" letter="D" gridArea="d" />
-      <Facility name="WORK DISPLAY" letter="E" gridArea="e" />
-      <Facility name="MINI CINEMA" letter="F" gridArea="f" />
-      <Facility name="TECH CREATION" letter="G" gridArea="g" />
-      <Facility name="INTERNET ACCESS" letter="H" gridArea="h" />
-      <Facility name="MAKERSPACE" letter="I" gridArea="i" />
-      <Facility name="RESTROOM" letter="J" gridArea="j" />
-      <Facility name="INSTRUCTION" letter="K" gridArea="k" />
-      <StairsFacility gridArea="stairs-left" />
-      <SeatingArea name="Quiet Zone" gridArea="quiet" seats={seatingAreas.quietZone} />
-      <SeatingArea name="Main Study Area" gridArea="main" seats={seatingAreas.mainArea} />
-      <SeatingArea name="Collaboration Pods" gridArea="pods" seats={seatingAreas.collabPods} />
-      <InfoMarker text="ENTRANCE" gridArea="entrance" icon={<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>} />
-      <InfoMarker text="TO/FROM 2F" gridArea="stairs-c" icon={<svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h5M20 20v-5h-5M4 20h5v-5M20 4h-5v5" /></svg>} />
+      {/* Row 1: Top facilities and entrance */}
+      <Facility name="SELF SERVICE COMMONS" letter="D" gridArea="1 / 1 / 2 / 2" />
+      <InfoMarker text="ENTRANCE" gridArea="1 / 2 / 2 / 5" icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7" /></svg>} />
+      <Facility name="IT HELPDESK" letter="B" gridArea="1 / 5 / 2 / 6" />
+      <Facility name="IT OFFICE" letter="A" gridArea="1 / 6 / 2 / 7" />
+      
+      {/* Row 2: Study areas and facilities */}
+      <SeatingArea name="Study Area" gridArea="2 / 1 / 3 / 2" seats={seatingAreas.upperLeftWhite} />
+      <InfoMarker text="YOU ARE HERE" gridArea="2 / 2 / 3 / 5" icon={<svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>} className="text-red-500" />
+      <Facility name="PHOTOCOPYING/PRINTING" letter="C" gridArea="2 / 5 / 3 / 6" />
+      <SeatingArea name="Study Area" gridArea="2 / 6 / 3 / 7" seats={seatingAreas.upperRightWhite} />
+      
+      {/* Row 3: F, E, Circle, K */}
+      <Facility name="MINI CINEMA" letter="F" gridArea="3 / 1 / 4 / 2" />
+      <Facility name="WORK DISPLAY" letter="E" gridArea="3 / 2 / 5 / 3" />
+      <div style={{gridArea: '3 / 3 / 5 / 5'}} className="flex items-center justify-center relative border-4 border-gray-800 rounded-full bg-white">
+        <div className="w-4/5 h-4/5 border-2 border-gray-600 rounded-full bg-gray-50"></div>
+        <div className="absolute bottom-2 flex items-center justify-center">
+          <span className="text-xs font-semibold text-orange-600">TO/FROM 2F</span>
+        </div>
+      </div>
+      <Facility name="INSTRUCTION ROOM" letter="K" gridArea="3 / 5 / 4 / 7" />
+      
+      {/* Row 4: Study area and J */}
+      <SeatingArea name="Study Area" gridArea="4 / 1 / 5 / 2" seats={seatingAreas.leftMiddleWhite} />
+      <Facility name="RESTROOM" letter="J" gridArea="4 / 5 / 5 / 6" />
+      <SeatingArea name="Study Area" gridArea="4 / 6 / 5 / 7" seats={seatingAreas.bottomRightWhite} />
+      
+      {/* Row 5: Study area moved to G's position, H, I */}
+      <SeatingArea name="Study Area" gridArea="5 / 1 / 6 / 2" seats={seatingAreas.bottomLeftWhite} />
+      <Facility name="INTERNET ACCESS AREA" letter="H" gridArea="5 / 3 / 7 / 5" />
+      <Facility name="MAKERSPACE" letter="I" gridArea="5 / 5 / 7 / 7" />
+      
+      {/* Row 6: G moved to bottom, aligned with H and I */}
+      <Facility name="TECHNOLOGY CREATION" letter="G" gridArea="6 / 1 / 7 / 2" />
     </div>
   );
 };
