@@ -44,9 +44,8 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
   const seatingAreas = {
     upperLeftWhite: seats.slice(0, 8),     // White area below D
     upperRightWhite: seats.slice(8, 16),   // White area to the right of A
-    leftMiddleWhite: seats.slice(16, 24),  // White area between stairs and circle
+    leftMergedWhite: seats.slice(16, 40),  // Merged white area below F (combining leftMiddle and bottomLeft)
     bottomRightWhite: seats.slice(24, 32), // White area below J
-    bottomLeftWhite: seats.slice(32, 40),  // White area above G
   };
   
   const StairsFacility: React.FC<{ gridArea: string }> = ({ gridArea }) => (
@@ -76,7 +75,6 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
       
       {/* Row 2: Study areas and facilities */}
       <SeatingArea name="Study Area" gridArea="2 / 1 / 3 / 2" seats={seatingAreas.upperLeftWhite} />
-      <InfoMarker text="YOU ARE HERE" gridArea="2 / 2 / 3 / 5" icon={<svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>} className="text-red-500" />
       <Facility name="PHOTOCOPYING/PRINTING" letter="C" gridArea="2 / 5 / 3 / 6" />
       <SeatingArea name="Study Area" gridArea="2 / 6 / 3 / 7" seats={seatingAreas.upperRightWhite} />
       
@@ -84,24 +82,26 @@ const FloorPlan1F: React.FC<{ seats: SeatData[] }> = ({ seats }) => {
       <Facility name="MINI CINEMA" letter="F" gridArea="3 / 1 / 4 / 2" />
       <Facility name="WORK DISPLAY" letter="E" gridArea="3 / 2 / 5 / 3" />
       <div style={{gridArea: '3 / 3 / 5 / 5'}} className="flex items-center justify-center relative border-4 border-gray-800 rounded-full bg-white">
-        <div className="w-4/5 h-4/5 border-2 border-gray-600 rounded-full bg-gray-50"></div>
-        <div className="absolute bottom-2 flex items-center justify-center">
+        <div className="w-2/3 h-2/3 border-2 border-gray-600 rounded-full bg-gray-50"></div>
+        <div className="absolute bottom-2 flex items-center justify-center gap-1">
+          <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l4-4m0 0l4 4m-4-4v18" />
+          </svg>
           <span className="text-xs font-semibold text-orange-600">TO/FROM 2F</span>
         </div>
       </div>
       <Facility name="INSTRUCTION ROOM" letter="K" gridArea="3 / 5 / 4 / 7" />
       
-      {/* Row 4: Study area and J */}
-      <SeatingArea name="Study Area" gridArea="4 / 1 / 5 / 2" seats={seatingAreas.leftMiddleWhite} />
-      <Facility name="RESTROOM" letter="J" gridArea="4 / 5 / 5 / 6" />
-      <SeatingArea name="Study Area" gridArea="4 / 6 / 5 / 7" seats={seatingAreas.bottomRightWhite} />
+      {/* Row 4-6: Rearranged layout - J below K, study area below J */}
+      <SeatingArea name="Study Area" gridArea="4 / 1 / 6 / 2" seats={seatingAreas.leftMergedWhite} />
+      <Facility name="RESTROOM" letter="J" gridArea="4 / 5 / 5 / 7" />
+      <SeatingArea name="Study Area" gridArea="5 / 5 / 6 / 7" seats={seatingAreas.bottomRightWhite} />
       
-      {/* Row 5: Study area moved to G's position, H, I */}
-      <SeatingArea name="Study Area" gridArea="5 / 1 / 6 / 2" seats={seatingAreas.bottomLeftWhite} />
+      {/* Row 5-6: H, I */}
       <Facility name="INTERNET ACCESS AREA" letter="H" gridArea="5 / 3 / 7 / 5" />
       <Facility name="MAKERSPACE" letter="I" gridArea="5 / 5 / 7 / 7" />
       
-      {/* Row 6: G moved to bottom, aligned with H and I */}
+      {/* Row 6-7: G positioned directly below the study area, bottom-aligned with H and I */}
       <Facility name="TECHNOLOGY CREATION" letter="G" gridArea="6 / 1 / 7 / 2" />
     </div>
   );
