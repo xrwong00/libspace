@@ -1,7 +1,8 @@
 LibSpace — Smart Library Seat Finder
 =================================
 
-A small React + Vite app that visualizes study room layouts and live seat availability across three floors.
+📝 Project Summary
+LibSpace is a smart campus solution designed to eliminate the frustration of finding a study spot in crowded university libraries. Using a Raspberry Pi, a camera, and an on-device computer vision model, the system provides a real-time, interactive map of seat availability. It enhances the student experience by saving time and reducing stress, while offering the university a cost-effective, scalable tool for resource management.
 
 Features
 --------
