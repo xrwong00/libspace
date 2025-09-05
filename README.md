@@ -2,7 +2,16 @@ LibSpace — Smart Library Seat Finder
 =================================
 
 📝 Project Summary
+--------
 LibSpace is a smart campus solution designed to eliminate the frustration of finding a study spot in crowded university libraries. Using a Raspberry Pi, a camera, and an on-device computer vision model, the system provides a real-time, interactive map of seat availability. It enhances the student experience by saving time and reducing stress, while offering the university a cost-effective, scalable tool for resource management.
+
+🤯 Problem Statement
+--------
+During peak hours and exam seasons, university libraries become incredibly crowded. Students waste valuable time and energy wandering through floors, searching for an available seat. This process is frustrating, inefficient, and adds unnecessary stress to the student experience. There is no central, reliable system to provide real-time information on seat occupancy.
+
+💡 Our Solution
+--------
+LibSpace solves this problem using computer vision. A Raspberry Pi and a camera are placed to oversee a zone of seats. A lightweight YOLO model runs directly on the device to detect human presence, and this information is sent to a central dashboard, providing students with a live map of available seats.
 
 Features
 --------
