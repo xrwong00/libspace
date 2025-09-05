@@ -37,7 +37,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ stats }) => {
       </div>
 
       <footer className="text-center text-gray-500 text-xs pt-4 border-t border-gray-200">
-        <p>Data updates automatically every 5 minutes.</p>
+        <p>Data updates automatically every 1 minute.</p>
       </footer>
     </div>
   );

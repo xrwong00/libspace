@@ -56,7 +56,7 @@ export const useSeatData = () => {
         
         return newSeatsByFloor;
       });
-    }, 300000); // Update every 5 minutes (300,000 milliseconds)
+  }, 60000); // Update every 1 minute (60,000 milliseconds)
 
     return () => clearInterval(simulationInterval);
   }, []);
