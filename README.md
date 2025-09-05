@@ -1,5 +1,6 @@
 LibSpace — Smart Library Seat Finder
 =================================
+<img width="1904" height="1079" alt="image" src="https://github.com/user-attachments/assets/bc4fd34a-c067-4eba-87ef-3deea7069386" />
 
 📝 Project Summary
 --------
@@ -11,68 +12,56 @@ During peak hours and exam seasons, university libraries become incredibly crowd
 
 💡 Our Solution
 --------
-LibSpace solves this problem using computer vision. A Raspberry Pi and a camera are placed to oversee a zone of seats. A lightweight YOLO model runs directly on the device to detect human presence, and this information is sent to a central dashboard, providing students with a live map of available seats.
+LibSpace solves this problem using computer vision. A single camera module, powered by a Raspberry Pi, can oversee multiple desks at once. A lightweight YOLO model runs directly on the device to detect human presence, and this information is sent to a central dashboard, providing students with a live map of available seats.
 
-Features
+✨ Key Features
 --------
-- Floor plans for 1F, 2F, and 3F with labeled facilities.
-- Seats show real-time status: green = available, red = occupied.
-- Live statistics panel (total / available / occupied / occupancy rate).
-- Simple simulated status updates (random toggles every 5 minutes) via `useSeatData`.
+- **Real-Time Interactive Map** – A clean, responsive web dashboard that shows the live status of every seat in the library.
+- **Live Occupancy Statistics** – Instantly see the total number of available seats and the overall occupancy rate.
+- **Privacy-First by Design** – All video is processed locally on the Raspberry Pi, ensuring full student anonymity.
+- **Cost-Effective & Scalable** – A single device can monitor multiple seats, making deployment affordable and simple to expand.
+- **False-Positive Resistant** – Differentiates between people and inanimate objects like bags, coats, or books.
 
-Quick start (Windows PowerShell)
--------------------------------
-1. Install dependencies:
+⚙️ System Architecture & Data Flow
+--------
+**System Overview**
+- **Detection Unit (Edge):** A Raspberry Pi and camera capture a live video feed.
+- **Local Processing:** A Python script using OpenCV and a YOLO model analyzes the feed on the device to determine which seats are occupied.
+- **Data Transmission:** The Pi constructs a tiny, anonymous JSON payload with a binary string (e.g., {"state": "0110"}) and sends it to our backend endpoint.
+- **Frontend Dashboard:** A web application receives real-time updates and visualizes the data for the end-user.
 
-```powershell
-npm install
-```
+**Schematic / Block Diagram**
+(Add a schematic/block diagram)
 
-2. Start the dev server:
+**Data Flow Diagram**
+(Add a data flow diagram)
 
-```powershell
-npm run dev
-```
+🛠️ Technology Stack  
+--------
+| **Component**     | **Technology**                  | 
+|-------------------|---------------------------------|
+| **Hardware**      | Raspberry Pi 4, Pi Camera Module | 
+| **Firmware / AI** | Python, OpenCV, YOLO Ultralytics | 
+| **Frontend**      | HTML5, CSS3, JavaScript (ES6+)  | 
+| **Communication** | REST API / MQTT *(Planned)*     | 
 
-3. Open http://localhost:5173 (Vite default) in your browser.
+🔐 Privacy & Security
+--------
+- All video processed locally on Raspberry Pi.
+- No video/images leave the device.
+- Only seat status metadata is transmitted.
+- Transparent signage in libraries ensures student trust.
 
-Environment variables
----------------------
-If your project uses external APIs (for example a Gemini API key), keep local secrets out of source control.
+📈 Scalability & Future Work
+--------
+LibSpace is designed to be scalable across an entire campus. Our vision for the future includes:
+- **Full Backend Implementation:** Develop a robust backend with a database to store historical data for analytics.
+- **User Authentication & Notifications:** Allow students to get notified when a seat becomes free in their favorite section.
+- **Energy Saving Integration:** Connect with smart campus systems to automatically turn off lights in empty library zones.
 
-Create a file named `.env.local` in the project root and add any keys you need, for example:
-
-```text
-GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-Make sure `.env.local` is listed in `.gitignore` (it is already in this repo) so you don't accidentally commit secrets.
-
-For production, configure secrets through your hosting provider or CI (Vercel, Netlify, GitHub Actions secrets, etc.) instead of committing them.
-
-Where to change layout & seat counts
------------------------------------
-- Floor layouts and seat slices are defined in `components/FloorPlan.tsx`.
-   - `FloorPlan2F` contains the 2F grid and seating areas.
-   - Each `SeatingArea` receives a slice of the floor's seats (from `useSeatData`).
-
-- Seat generation and global counts live in `hooks/useSeatData.ts`.
-   - `SEAT_COUNTS` controls how many seats the app creates per floor.
-   - If you change slices in `FloorPlan.tsx`, update `SEAT_COUNTS['2F']` accordingly.
-
-How statistics are computed
---------------------------
-- `useSeatData` returns `seatsByFloor` and `statsByFloor`.
-- `statsByFloor[floor]` includes total, available, occupied, and occupancy rate.
-- Available = total - occupied; occupied = seats.filter(s => s.status === SeatStatus.OCCUPIED).length
-
-Customizing behavior
---------------------
-- To change the seat status update frequency, edit the interval inside `useEffect` in `hooks/useSeatData.ts`.
-- To seed specific seat states, modify `generateInitialSeats` in `hooks/useSeatData.ts`.
-
-Notes
------
-- The app uses a simple simulated data source; connect a real backend by replacing `useSeatData`.
-- Keep slices in `FloorPlan.tsx` synchronized with `SEAT_COUNTS` in `useSeatData.ts` to avoid mismatched indices.
-
+👥 Team
+--------
+- Ling Jing Jie – Computer Vision 
+- Lee Kah Chun – IoT
+- John Elisha Sandran – Backend & API
+- Wong Xuan Rui – Dashboard Interface
