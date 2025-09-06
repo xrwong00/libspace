@@ -49,7 +49,7 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 <img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/CAD_design/overall_CAD.jpeg" />
 
 **ABS MCU enclosure**
-<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/CAD_design/MCU_enclosure.jpeg" />
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4_builders_Codenection_ld2410c.jpg" />
 - MCU controller enclosure will be printed using ABS material which is RF friendly
 - On board WiFi Module 
 - ESP-NOW protocol, multiple client WeMos boards transmit their sensor data in digital format databits of example "10001" indicating efficiently 6 sensors digital boolean to a main host WeMos
