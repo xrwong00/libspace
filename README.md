@@ -31,7 +31,7 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 - **Frontend Dashboard:** A web application receives real-time updates and visualizes the data for the end-user.
 
 **Schematic / Block Diagram**
-(Add a schematic/block diagram)
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4_builders_Codenection.drawio.png?raw=true" />
 
 **Data Flow Diagram**
 (Add a data flow diagram)
