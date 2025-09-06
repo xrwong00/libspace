@@ -38,7 +38,7 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 
 
 **Data Flow Diagram**
-<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4_builders_Codenection_ld2410c?raw=true" />
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4_builders_Codenection_ld2410c.jpg?raw=true" />
 - ESP-NOW provides a flexible and low-power data transmission to all interconnected devices
 - Multiple Client Wemos D1 mini controller transmit real time update from radar sensor to host Wemos D1 mini
 - Through UART host Wemos compiled and transmit real time seat availability data to raspberry Pi fetch to web interface
