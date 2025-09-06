@@ -36,7 +36,7 @@ const App: React.FC = () => {
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
               📚LibSpace
-              <span className="block text-base text-gray-600 font-normal tracking-normal mt-1 pl-9 sm:pl-12">AI Smart Library Seat Finder</span>
+              <span className="block text-base text-gray-600 font-normal tracking-normal mt-1 pl-9 sm:pl-12">Smart AI Library Seat Finder</span>
             </h1>
           </div>
 
