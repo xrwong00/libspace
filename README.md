@@ -31,12 +31,14 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 - **Frontend Dashboard:** A web application receives real-time updates and visualizes the data for the end-user.
 
 **Schematic Wiring Diagram**
-<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4builders_wemos.jfif" />
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4builders_updatedsensor_wiring.png" />
 - An 12V 2A rated adapter is used to power each client Wemos with buck converter power control
 - All sensor is power by constant 5V supply
+- AMS1117 voltage regulator used for voltage for sensors supply
+
 
 **Data Flow Diagram**
-<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4_builders_Codenection.drawio.png?raw=true" />
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4_builders_Codenection_ld2410c?raw=true" />
 - ESP-NOW provides a flexible and low-power data transmission to all interconnected devices
 - Multiple Client Wemos D1 mini controller transmit real time update from radar sensor to host Wemos D1 mini
 - Through UART host Wemos compiled and transmit real time seat availability data to raspberry Pi fetch to web interface
