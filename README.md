@@ -42,11 +42,18 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 - Through UART host Wemos compiled and transmit real time seat availability data to raspberry Pi fetch to web interface
 
 **CAD drawing visualise placement MCU and sensor**
+**Overall view**
 - Partially CAD drawing visualize overall placement of hardware component
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/CAD_design/overall_CAD.jpeg" />
 
+**ABS MCU enclosure**
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/CAD_design/MCU_enclosure.jpeg" />
 - enclosure will be printed using ABS material which is RF friendly
 
+**Sensor placement**
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/CAD_design/Sensor_placement.jpeg" />
 - sensor placement will easily detected human presence even if human stay stationary
+
 
 🛠️ Technology Stack  
 --------
