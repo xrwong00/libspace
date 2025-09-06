@@ -1,6 +1,6 @@
 LibSpace — AI Smart Library Seat Finder
 =================================
-<img width="1904" height="1079" alt="image" src="https://github.com/user-attachments/assets/bc4fd34a-c067-4eba-87ef-3deea7069386" />
+<img width="1893" height="1079" alt="image" src="https://github.com/user-attachments/assets/1acb5662-8b54-49d9-a757-acf94fb772f0" />
 
 📝 Project Summary
 --------
