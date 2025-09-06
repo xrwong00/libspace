@@ -48,19 +48,22 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 
 **ABS MCU enclosure**
 <img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/CAD_design/MCU_enclosure.jpeg" />
-- enclosure will be printed using ABS material which is RF friendly
+- MCU controller enclosure will be printed using ABS material which is RF friendly
+- On board WiFi Module 
+- ESP-NOW protocol, multiple client WeMos boards transmit their sensor data in digital format databits of example "10001" indicating efficiently 6 sensors digital boolean to a main host WeMos
 
 **Sensor placement**
 <img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/CAD_design/Sensor_placement.jpeg" />
 - sensor placement will easily detected human presence even if human stay stationary
+- operate at microwave radar motion sensor of frequency ~3.18GHz
 
 
 🛠️ Technology Stack  
 --------
 | **Component**     | **Technology**                  | 
 |-------------------|---------------------------------|
-| **Hardware**      | Raspberry Pi 4, AI IMX5000 Pi Camera | 
-| **Firmware / AI** | Python, OpenCV, YOLO Ultralytics | 
+| **Hardware**      | Raspberry Pi 4, AI IMX5000 Pi Camera, Wemos D1 mini, RCWL-0516| 
+| **Firmware / Framework** | Python, OpenCV, YOLO Ultralytics, C++ | 
 | **Frontend**      | HTML5, CSS3, JavaScript (ES6+)  | 
 | **Communication** | ESP-NOW, UART, Digital Output   | 
 
