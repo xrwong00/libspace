@@ -59,14 +59,14 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 --------
 | **Component**     | **Technology**                  | 
 |-------------------|---------------------------------|
-| **Hardware**      | Raspberry Pi 4, Pi Camera Module | 
+| **Hardware**      | Raspberry Pi 4, AI IMX5000 Pi Camera | 
 | **Firmware / AI** | Python, OpenCV, YOLO Ultralytics | 
 | **Frontend**      | HTML5, CSS3, JavaScript (ES6+)  | 
 | **Communication** | ESP-NOW, UART, Digital Output   | 
 
 🔐 Privacy & Security
 --------
-- All video processed locally on Raspberry Pi.
+- All video processed on DSP IMX5000 Pi camera cam and pass to Raspberry Pi.
 - No video/images leave the device.
 - Only seat status metadata is transmitted.
 - Transparent signage in libraries ensures student trust.
