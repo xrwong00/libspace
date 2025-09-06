@@ -30,11 +30,23 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 - **Data Transmission:** The Pi constructs a tiny, anonymous JSON payload with a binary string (e.g., {"state": "0110"}) and sends it to our backend endpoint.
 - **Frontend Dashboard:** A web application receives real-time updates and visualizes the data for the end-user.
 
-**Schematic / Block Diagram**
-<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4_builders_Codenection.drawio.png?raw=true" />
+**Schematic Wiring Diagram**
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4builders_wemos.jfif" />
+- An 12V 2A rated adapter is used to power each client Wemos with buck converter power control
+- All sensor is power by constant 5V supply
 
 **Data Flow Diagram**
-(Add a data flow diagram)
+<img width="1904" height="1079" alt="image" src="https://github.com/xrwong00/libspace/blob/main/Hardware/4_builders_Codenection.drawio.png?raw=true" />
+- ESP-NOW provides a flexible and low-power data transmission to all interconnected devices
+- Multiple Client Wemos D1 mini controller transmit real time update from radar sensor to host Wemos D1 mini
+- Through UART host Wemos compiled and transmit real time seat availability data to raspberry Pi fetch to web interface
+
+**CAD drawing visualise placement MCU and sensor**
+- Partially CAD drawing visualize overall placement of hardware component
+
+- enclosure will be printed using ABS material which is RF friendly
+
+- sensor placement will easily detected human presence even if human stay stationary
 
 🛠️ Technology Stack  
 --------
@@ -43,7 +55,7 @@ LibSpace solves this problem using computer vision. A single camera module, powe
 | **Hardware**      | Raspberry Pi 4, Pi Camera Module | 
 | **Firmware / AI** | Python, OpenCV, YOLO Ultralytics | 
 | **Frontend**      | HTML5, CSS3, JavaScript (ES6+)  | 
-| **Communication** | REST API / MQTT *(Planned)*     | 
+| **Communication** | ESP-NOW, UART, Digital Output   | 
 
 🔐 Privacy & Security
 --------
